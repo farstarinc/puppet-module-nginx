@@ -47,7 +47,7 @@ rewritten to the actual /some-slug.html file:
 
     nginx::site { "journal":
       domain => "journal.uggedal.com",
-      rewrite_html => true,
+      rewrite_missing_html_extension => true,
       root => "/var/www/journal",
     }
 
