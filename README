@@ -15,6 +15,12 @@ to serve Python WSGI applications, but can be used just as
 well as a frontend to other languages and frameworks.
 
 
+TODO
+----
+
+* make hardcoded www-mgr user a class argument
+
+
 Installation
 ------------
 
