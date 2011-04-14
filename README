@@ -11,6 +11,16 @@ This module is used by my forthcoming Puppet Gunicorn Module
 to serve Python WSGI applications, but can be used just as
 well as a frontend to other languages and frameworks.
 
+
+Installation
+------------
+
+Clone this repo to a nginx directory under your Puppet
+modules directory:
+
+    git clone git://github.com/uggedal/puppet-module-nginx.git nginx
+
+
 Usage
 -----
 

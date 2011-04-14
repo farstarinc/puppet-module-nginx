@@ -45,6 +45,5 @@ define nginx::site($domain,
       },
       require => File["/etc/nginx/sites-available/${name}.conf"],
       notify => Service[nginx];
-    }
   }
 }
