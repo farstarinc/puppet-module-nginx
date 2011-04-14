@@ -1,14 +1,19 @@
-class nginx($worker_processes=1) {
+class nginx($worker_processes=1, $ensure=present) {
   package { nginx:
-    ensure => present,
+    ensure => $ensure ? {
+      'present' => $ensure,
+      'absent' => purged,
+    },
   }
 
   file {
     "/etc/nginx/nginx.conf":
+      ensure => $ensure,
       content => template("nginx/nginx.conf.erb"),
       require => Package[nginx];
 
     "/etc/logrotate.d/nginx":
+      ensure => $ensure,
       source => "puppet:///modules/nginx/nginx.logrotate",
       require => Package[nginx];
 
@@ -19,7 +24,10 @@ class nginx($worker_processes=1) {
   }
 
   service { nginx:
-    ensure => running,
+    ensure => $ensure ? {
+      'present' => running,
+      'absent' => stopped,
+    },
     enable => true,
     pattern => "nginx: master process",
     subscribe => File["/etc/nginx/nginx.conf"],
