@@ -77,13 +77,13 @@ Nginx and not by your application servers:
       upstreams => ["unix:/var/run/mediaqueri.es.sock"],
     }
 
-You can also provide a user and group which will be the owner of the
+You can also provide a owner and group which will be the owner of the
 virtual host's root directory:
 
     nginx::site { "journal":
       domain => "journal.uggedal.com",
       rewrite_missing_html_extension => true,
       root => "/var/www/journal",
-      user => "www-mgr",
+      owner => "www-mgr",
       group => "www-mgr",
     }

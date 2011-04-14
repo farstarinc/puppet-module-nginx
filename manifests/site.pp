@@ -24,7 +24,7 @@ define nginx::site($domain,
     if !defined(File[$root_parent]) {
       file { $root_parent:
         ensure => directory,
-        owner => $user,
+        owner => $owner,
         group => $group,
       }
     }
