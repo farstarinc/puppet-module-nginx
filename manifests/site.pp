@@ -15,6 +15,15 @@ define nginx::site($domain,
       owner => "www-mgr",
       group => "www-mgr",
     }
+
+    # Parent directory of root directory. /var/www for /var/www/blog
+    $root_parent = inline_template("<%= root.match(%r!(.+)/.+!)[1] %>")
+
+    if !defined(File[$root_parent]) {
+      file { $root_parent:
+        ensure => directory,
+      }
+    }
   } elsif $ensure == 'absent' {
 
     file { $root:
