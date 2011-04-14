@@ -23,6 +23,12 @@ modules directory:
 
     git clone git://github.com/uggedal/puppet-module-nginx.git nginx
 
+If you don't have a Puppet Master you can create a manifest file
+based on the notes below and run Puppet in stand-alone mode
+providing the module directory you cloned this repo to:
+
+    puppet apply --modulepath=modules test_nginx.pp
+
 
 Usage
 -----
