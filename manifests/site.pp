@@ -1,6 +1,8 @@
 define nginx::site($domain,
                    $root,
                    $ensure=present,
+                   $owner=undef,
+                   $group=undef,
                    $mediaroot="",
                    $mediaprefix="",
                    $default_vhost=false,
@@ -12,8 +14,8 @@ define nginx::site($domain,
 
     file { $root:
       ensure => directory,
-      owner => "www-mgr",
-      group => "www-mgr",
+      owner => $owner,
+      group => $group,
     }
 
     # Parent directory of root directory. /var/www for /var/www/blog
@@ -22,14 +24,16 @@ define nginx::site($domain,
     if !defined(File[$root_parent]) {
       file { $root_parent:
         ensure => directory,
+        owner => $user,
+        group => $group,
       }
     }
   } elsif $ensure == 'absent' {
 
     file { $root:
       ensure => $ensure,
-      owner => "www-mgr",
-      group => "www-mgr",
+      owner => $owner,
+      group => $group,
       recurse => true,
       purge => true,
       force => true,
