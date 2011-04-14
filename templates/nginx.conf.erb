@@ -6,7 +6,7 @@ pid        /var/run/nginx.pid;
 
 events {
   worker_connections 1024;
-  accept_mutex <%= worker_process > 1 ? "on" : "off";
+  accept_mutex <%= worker_process > 1 ? "on" : "off" %>;
   use epoll;
 }
 
