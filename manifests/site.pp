@@ -11,13 +11,6 @@ define nginx::site($domain,
                    $aliases=[]) {
 
   if $ensure == 'present' {
-
-    file { $root:
-      ensure => directory,
-      owner => $owner,
-      group => $group,
-    }
-
     # Parent directory of root directory. /var/www for /var/www/blog
     $root_parent = inline_template("<%= root.match(%r!(.+)/.+!)[1] %>")
 
@@ -28,6 +21,14 @@ define nginx::site($domain,
         group => $group,
       }
     }
+
+    file { $root:
+      ensure => directory,
+      owner => $owner,
+      group => $group,
+      require => File[$root_parent],
+    }
+
   } elsif $ensure == 'absent' {
 
     file { $root:
