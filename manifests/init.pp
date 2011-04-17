@@ -28,7 +28,10 @@ class nginx($worker_processes=1, $ensure=present) {
       'present' => running,
       'absent' => stopped,
     },
-    enable => true,
+    enable => $ensure ? {
+      'present' => true,
+      'absent' => false,
+    },
     pattern => "nginx: master process",
     subscribe => File["/etc/nginx/nginx.conf"],
     require => [File["/etc/nginx/nginx.conf"],
