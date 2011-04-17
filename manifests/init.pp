@@ -1,4 +1,6 @@
 class nginx($worker_processes=1, $ensure=present) {
+  $is_present = $ensure == "present"
+
   package { nginx:
     ensure => $ensure ? {
       'present' => $ensure,
@@ -24,15 +26,10 @@ class nginx($worker_processes=1, $ensure=present) {
   }
 
   service { nginx:
-    ensure => $ensure ? {
-      'present' => running,
-      'absent' => stopped,
-    },
-    enable => $ensure ? {
-      'present' => true,
-      'absent' => false,
-    },
-    pattern => "nginx: master process",
+    ensure => $is_present,
+    enable => $is_present,
+    hasstatus => $is_present,
+    hasrestart => $is_present,
     subscribe => File["/etc/nginx/nginx.conf"],
     require => [File["/etc/nginx/nginx.conf"],
                 File["/etc/logrotate.d/nginx"]],
