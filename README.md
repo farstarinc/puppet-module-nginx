@@ -34,11 +34,11 @@ providing the module directory you cloned this repo to:
 Usage
 -----
 
-To install and configure Nginx, import the module:
+To install and configure Nginx, include the module:
 
-    import nginx
+    include nginx
 
-You can override defaults in the Nginx config by importing
+You can override defaults in the Nginx config by including
 the module with this special syntax:
 
     class { nginx: worker_processes => 4 }
