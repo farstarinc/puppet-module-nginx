@@ -1,12 +1,12 @@
 user www-data;
-worker_processes <%= worker_processes %>;
+workers <%= workers %>;
 
 error_log  /var/log/nginx/error.log;
 pid        /var/run/nginx.pid;
 
 events {
   worker_connections 1024;
-  accept_mutex <%= worker_processes.to_i > 1 ? "on" : "off" %>;
+  accept_mutex <%= workers.to_i > 1 ? "on" : "off" %>;
   use epoll;
 }
 

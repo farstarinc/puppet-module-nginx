@@ -41,7 +41,7 @@ To install and configure Nginx, include the module:
 You can override defaults in the Nginx config by including
 the module with this special syntax:
 
-    class { nginx: worker_processes => 4 }
+    class { nginx: workers => 4 }
 
 Setting up virtual hosts is done with the nginx::site resource:
 

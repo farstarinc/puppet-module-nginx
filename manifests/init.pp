@@ -1,4 +1,4 @@
-class nginx($worker_processes=1, $ensure=present) {
+class nginx($workers=1, $ensure=present) {
   $is_present = $ensure == "present"
 
   package { nginx:
