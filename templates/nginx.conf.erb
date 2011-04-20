@@ -1,5 +1,5 @@
 user www-data;
-workers <%= workers %>;
+worker_processes <%= workers %>;
 
 error_log  /var/log/nginx/error.log;
 pid        /var/run/nginx.pid;
