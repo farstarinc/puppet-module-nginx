@@ -16,6 +16,12 @@ but can be used just as well as a frontend to other languages
 and frameworks.
 
 
+TODO
+----
+
+* Stop Nginx processes before deleting the init script.
+
+
 Installation
 ------------
 
