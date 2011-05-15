@@ -10,11 +10,6 @@ This module can be used to serve both static sites and
 proxy to backend application servers while serving static
 media through Nginx.
 
-This module is used by my forthcoming Puppet Gunicorn Module
-and Puppet Virtualenv Module to serve Python WSGI applications,
-but can be used just as well as a frontend to other languages
-and frameworks.
-
 
 TODO
 ----
