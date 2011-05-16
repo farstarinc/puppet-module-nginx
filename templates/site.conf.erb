@@ -2,7 +2,7 @@
 server {
   listen 80;
   server_name<% aliases.each do |a| %> <%= a %><% end %>;
-  rewrite ^(.*) http://<%= domain %>$1 permanent;
+  rewrite ^ http://<%= domain %>$request_uri? permanent;
 }
 <% end %>
 
