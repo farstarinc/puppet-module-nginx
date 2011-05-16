@@ -19,6 +19,8 @@ server {
   client_max_body_size 4G;
   server_name <%= domain %>;
 
+  root <%= root %>;
+
   access_log  /var/log/nginx/<%= name %>.access.log;
 
   keepalive_timeout 5;
@@ -35,7 +37,6 @@ server {
   <% end %>
 
   location / {
-    root <%= root %>;
 
     <% if upstreams.any? %>
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
