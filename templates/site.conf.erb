@@ -43,13 +43,13 @@ server {
     proxy_set_header Host $http_host;
     proxy_redirect off;
 
-    try_files $uri $uri/ @<%= name %>
+    try_files $uri $uri/ @<%= name %>;
     <% else %>
     index  index.html;
     <% end %>
 
     <% if rewrite_missing_html_extension %>
-    try_files $uri $uri/ $uri.html
+    try_files $uri $uri/ $uri.html;
     <% end %>
   }
 
