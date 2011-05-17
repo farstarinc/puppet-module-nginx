@@ -43,7 +43,7 @@ server {
     proxy_set_header Host $http_host;
     proxy_redirect off;
 
-    try_files $uri $uri/ @<%= name %>;
+    try_files $uri @<%= name %>;
     <% else %>
     index  index.html;
     <% end %>
