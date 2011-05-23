@@ -2,10 +2,7 @@ class nginx($workers=1, $ensure=present) {
   $is_present = $ensure == "present"
 
   package { nginx:
-    ensure => $ensure ? {
-      'present' => $ensure,
-      'absent' => purged,
-    },
+    ensure => $ensure,
   }
 
   file {
@@ -17,12 +14,11 @@ class nginx($workers=1, $ensure=present) {
     "/etc/logrotate.d/nginx":
       ensure => $ensure,
       source => "puppet:///modules/nginx/nginx.logrotate",
-      require => Package[nginx];
+      before => File["/etc/nginx/nginx.conf"];
 
     "/etc/nginx/sites-enabled/default":
       ensure => absent,
-      require => Package[nginx],
-      notify => Service[nginx];
+      before => File["/etc/nginx/nginx.conf"];
   }
 
   service { nginx:
@@ -30,8 +26,17 @@ class nginx($workers=1, $ensure=present) {
     enable => $is_present,
     hasstatus => $is_present,
     hasrestart => $is_present,
-    subscribe => File["/etc/nginx/nginx.conf"],
-    require => [File["/etc/nginx/nginx.conf"],
-                File["/etc/logrotate.d/nginx"]],
+    subscribe => $ensure ? {
+      'present' => File["/etc/nginx/nginx.conf"],
+      default => undef,
+    },
+    require => $ensure ? {
+      'present' => File["/etc/nginx/nginx.conf"],
+      default => undef,
+    },
+    before => $ensure ? {
+      'absent' => File["/etc/nginx/nginx.conf"],
+      default => undef,
+    },
   }
 }

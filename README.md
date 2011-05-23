@@ -11,12 +11,6 @@ proxy to backend application servers while serving static
 media through Nginx.
 
 
-TODO
-----
-
-* Stop Nginx processes before deleting the init script.
-
-
 Installation
 ------------
 
