@@ -11,6 +11,11 @@ class nginx($workers=1, $ensure=present) {
       content => template("nginx/nginx.conf.erb"),
       require => Package[nginx];
 
+    "/etc/nginx/mime.types":
+      ensure => $ensure,
+      source => "puppet:///modules/nginx/mime.types",
+      before => File["/etc/nginx/nginx.conf"];
+
     "/etc/logrotate.d/nginx":
       ensure => $ensure,
       source => "puppet:///modules/nginx/nginx.logrotate",

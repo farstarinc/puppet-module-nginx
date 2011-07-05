@@ -30,7 +30,10 @@ http {
   gzip_types text/plain text/html text/xml text/css
              text/comma-separated-values
              text/javascript application/x-javascript application/json
-             application/xml application/xml+rss application/atom+xml;
+             application/xml application/xml+rss application/atom+xml
+             application/vnd.ms-fontobject application/x-font-ttf
+             font/opentype;
+
   gzip_static on;
   gzip_proxied        expired no-cache no-store private auth;
   gzip_disable        "MSIE [1-6]\.";
