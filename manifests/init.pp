@@ -14,16 +14,16 @@ class nginx($workers=1, $ensure=present) {
     "/etc/nginx/mime.types":
       ensure => $ensure,
       source => "puppet:///modules/nginx/mime.types",
-      before => File["/etc/nginx/nginx.conf"];
+      require => File["/etc/nginx/nginx.conf"];
 
     "/etc/logrotate.d/nginx":
       ensure => $ensure,
       source => "puppet:///modules/nginx/nginx.logrotate",
-      before => File["/etc/nginx/nginx.conf"];
+      require => File["/etc/nginx/nginx.conf"];
 
     "/etc/nginx/sites-enabled/default":
       ensure => absent,
-      before => File["/etc/nginx/nginx.conf"];
+      require => File["/etc/nginx/nginx.conf"];
   }
 
   service { nginx:
