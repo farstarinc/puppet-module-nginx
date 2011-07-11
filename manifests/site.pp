@@ -45,7 +45,8 @@ define nginx::site($domain,
     "/etc/nginx/sites-available/${name}.conf":
       ensure => $ensure,
       content => template("nginx/site.conf.erb"),
-      require => File[$root],
+      require => [File[$root],
+                  Package[nginx]],
       notify => Service[nginx];
 
     "/etc/nginx/sites-enabled/${name}.conf":
