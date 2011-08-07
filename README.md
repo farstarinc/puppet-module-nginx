@@ -68,7 +68,8 @@ servers which should be proxied to:
 
 Provide a URL media prefix and media root directory if you have a
 media directory of static files which should be served directly by
-Nginx and not by your application servers:
+Nginx and not by your application servers. These files will be
+cached indefinitely:
 
     nginx::site { "mediaqueri.es":
       domain => "mediaqueri.es",
@@ -77,6 +78,16 @@ Nginx and not by your application servers:
       mediaroot => "/var/www/mediaqueri.es/mediaqueries/static",
       mediaprefix => "/static",
       upstreams => ["unix:/var/run/mediaqueri.es.sock"],
+    }
+
+If you provide a relative `mediaroot` it will be relative to the
+`root` directly:
+
+    nginx::site { "journal":
+      domain => "journal.uggedal.com",
+      root => "/var/www/journal",
+      mediaroot => "files/media",
+      mediaprefix => "/media",
     }
 
 You can also provide a owner and group which will be the owner of the

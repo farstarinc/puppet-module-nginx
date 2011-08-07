@@ -27,11 +27,11 @@ server {
 
   <% if mediaroot.any? %>
   location = /favicon.ico {
-    alias <%= mediaroot %>/favicon.ico;
+    alias <%= absolute_mediaroot %>/favicon.ico;
   }
 
   location <%= mediaprefix %> {
-    alias <%= mediaroot %>;
+    alias <%= absolute_mediaroot %>;
     expires max;
   }
   <% end %>

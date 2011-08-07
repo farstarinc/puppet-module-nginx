@@ -10,6 +10,8 @@ define nginx::site($domain,
                    $upstreams=[],
                    $aliases=[]) {
 
+  $absolute_mediaroot = inline_template("<%= File.expand_path(mediaroot, root) %>")
+
   if $ensure == 'present' {
     # Parent directory of root directory. /var/www for /var/www/blog
     $root_parent = inline_template("<%= root.match(%r!(.+)/.+!)[1] %>")
