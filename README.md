@@ -81,7 +81,7 @@ cached indefinitely:
     }
 
 If you provide a relative `mediaroot` it will be relative to the
-`root` directly:
+`root` directory:
 
     nginx::site { "journal":
       domain => "journal.uggedal.com",
