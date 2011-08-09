@@ -28,11 +28,13 @@ server {
   <% if mediaroot.any? %>
   location = /favicon.ico {
     alias <%= absolute_mediaroot %>/favicon.ico;
+    access_log off;
   }
 
   location <%= mediaprefix %> {
     alias <%= absolute_mediaroot %>;
     expires max;
+    access_log off;
   }
   <% end %>
 
