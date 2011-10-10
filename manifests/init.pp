@@ -1,11 +1,18 @@
 class nginx($workers=1, $ensure=present) {
   $is_present = $ensure == "present"
+  $root = "/var/www"
 
   package { nginx:
     ensure => $ensure,
   }
 
   file {
+    "/var/www":
+      ensure => $ensure ? {
+        'present' => directory,
+        default => $ensure,
+      };
+
     "/etc/nginx/nginx.conf":
       ensure => $ensure,
       content => template("nginx/nginx.conf.erb"),
@@ -44,4 +51,5 @@ class nginx($workers=1, $ensure=present) {
       default => undef,
     },
   }
+
 }

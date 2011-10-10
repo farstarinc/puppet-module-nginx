@@ -3,32 +3,19 @@ define nginx::site($domain,
                    $ensure=present,
                    $owner=undef,
                    $group=undef,
-                   $mediaroot="",
+                   $static_dirs=[],
                    $mediaprefix="",
                    $default_vhost=false,
                    $rewrite_missing_html_extension=false,
                    $upstreams=[],
                    $aliases=[]) {
 
-  $absolute_mediaroot = inline_template("<%= File.expand_path(mediaroot, root) %>")
-
   if $ensure == 'present' {
-    # Parent directory of root directory. /var/www for /var/www/blog
-    $root_parent = inline_template("<%= root.match(%r!(.+)/.+!)[1] %>")
-
-    if !defined(File[$root_parent]) {
-      file { $root_parent:
-        ensure => directory,
-        owner => $owner,
-        group => $group,
-      }
-    }
-
+    
     file { $root:
       ensure => directory,
       owner => $owner,
       group => $group,
-      require => File[$root_parent],
     }
 
   } elsif $ensure == 'absent' {
