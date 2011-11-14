@@ -16,6 +16,7 @@ define nginx::site($domain,
       ensure => directory,
       owner => $owner,
       group => $group,
+      mode => 775,
     }
 
   } elsif $ensure == 'absent' {

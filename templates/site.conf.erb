@@ -29,7 +29,7 @@ server {
 
 <% static_dirs.each do |dir| -%>
   location /<%= dir.gsub(/^\/|\/$/, '') %> {
-    root /<%= root.gsub(/^\/|\/$/, '') %>/<%= dir.gsub(/^\/|\/$/, '') %>;
+    root /<%= root.gsub(/^\/|\/$/, '') %>;
     access_log off;
 
     # if asset versioning is used
